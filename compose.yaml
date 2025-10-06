@@ -1,1 +1,15 @@
 services:
+  postgres:
+    image: postgres:17.5
+    container_name: spring-boot-aop-jamon-postgres
+    environment:
+      POSTGRES_USER: yu71
+      POSTGRES_PASSWORD: 53cret
+      POSTGRES_DB: jamondb
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
