@@ -3,9 +3,8 @@ package id.my.hendisantika.springbootaopjamon.health;
 import io.micrometer.core.instrument.Gauge;
 import io.micrometer.core.instrument.MeterRegistry;
 import lombok.RequiredArgsConstructor;
+import org.springframework.boot.actuate.health.Status;
 import org.springframework.scheduling.annotation.Scheduled;
-
-import static jdk.internal.org.jline.utils.Status.getStatus;
 
 /**
  * Created by IntelliJ IDEA.
@@ -30,5 +29,15 @@ public class HealthMetrics {
                         () -> getStatus(accountHealthIndicator.getHealth(true).getStatus())
                 )
                 .register(meterRegistry);
+    }
+
+    private int getStatus(Status status) {
+        return switch (status.getCode()) {
+            case "NO_ACCOUNT" -> 0;
+            case "DOWN" -> 1;
+            case "OUT_OF_SERVICE" -> 2;
+            case "UP" -> 3;
+            default -> -1;
+        };
     }
 }
