@@ -1,5 +1,6 @@
 package id.my.hendisantika.springbootaopjamon.config;
 
+import io.micrometer.core.instrument.MeterRegistry;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ReflectiveScan;
@@ -29,4 +30,8 @@ public class HealthConfig {
         return new AccountHealthIndicator(jdbcTemplate);
     }
 
+    @Bean
+    public HealthMetrics healthMetrics(MeterRegistry meterRegistry) {
+        return new HealthMetrics(accountHealthIndicator(), meterRegistry);
+    }
 }
