@@ -1,6 +1,9 @@
 package id.my.hendisantika.springbootaopjamon.config;
 
+import id.my.hendisantika.springbootaopjamon.health.AccountHealthIndicator;
+import id.my.hendisantika.springbootaopjamon.health.HealthMetrics;
 import io.micrometer.core.instrument.MeterRegistry;
+import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ReflectiveScan;
@@ -21,6 +24,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 @Configuration
 @EnableScheduling
 @ReflectiveScan
+@RequiredArgsConstructor
 public class HealthConfig {
 
     private final JdbcTemplate jdbcTemplate;
