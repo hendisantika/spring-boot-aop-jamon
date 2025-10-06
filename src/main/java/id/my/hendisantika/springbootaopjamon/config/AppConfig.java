@@ -1,5 +1,8 @@
 package id.my.hendisantika.springbootaopjamon.config;
 
+import io.micrometer.core.instrument.MeterRegistry;
+import org.springframework.boot.actuate.autoconfigure.metrics.MeterRegistryCustomizer;
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
@@ -17,4 +20,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 @ComponentScan(basePackages = {"id.my.hendisantika.springbootaopjamon.controller", "id.my.hendisantika.springbootaopjamon.service"})
 public class AppConfig {
+    @Bean
+    MeterRegistryCustomizer<MeterRegistry> metricsCommonTags() {
+        return registry -> registry.config().commonTags("application", "HENDISANTIKA");
+    }
 }
