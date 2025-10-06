@@ -1,7 +1,11 @@
 package id.my.hendisantika.springbootaopjamon.controller;
 
+import com.jamonapi.Monitor;
 import com.jamonapi.MonitorFactoryInterface;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -22,5 +26,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class MonitorController {
 
     private final MonitorFactoryInterface monitorFactoryInterface;
+
+    @GetMapping("{name}")
+    public ResponseEntity<String> getMonitorDetails(@PathVariable("name") String name) {
+        Monitor monitor = monitorFactoryInterface.getMonitor(name, "ms.");
+        return ResponseEntity.ok(monitor.toString());
+    }
 
 }
