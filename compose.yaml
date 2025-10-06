@@ -5,11 +5,12 @@ services:
     environment:
       POSTGRES_USER: yu71
       POSTGRES_PASSWORD: 53cret
-      POSTGRES_DB: jamondb
+      POSTGRES_DB: account
     ports:
-      - "5432:5432"
+      - "5433:5432"
     volumes:
       - ./postgres_data:/var/lib/postgresql/data
+      - ./schema.sql:/docker-entrypoint-initdb.d/schema.sql
 
 volumes:
   postgres_data:
