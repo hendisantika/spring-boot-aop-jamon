@@ -1,6 +1,6 @@
 package id.my.hendisantika.springbootaopjamon.health;
 
-import lombok.RequiredArgsConstructor;
+import org.springframework.boot.actuate.health.Health;
 import org.springframework.boot.actuate.health.HealthIndicator;
 import org.springframework.jdbc.core.JdbcTemplate;
 
@@ -17,4 +17,14 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public record AccountHealthIndicator(JdbcTemplate jdbcTemplate) implements HealthIndicator {
 
+    @Override
+    public Health health() {
+        Long count = jdbcTemplate.queryForObject("SELECT COUNT(*) FROM account", Long.class);
+
+        if (count >= 5) {
+            return Health.up().withDetail("accounts", count).build();
+        } else {
+            return Health.status("NO_ACCOUNT").withDetail("accounts", count).build();
+        }
+    }
 }
