@@ -1,7 +1,11 @@
 package id.my.hendisantika.springbootaopjamon.controller;
 
+import id.my.hendisantika.springbootaopjamon.annotation.MethodMonitor;
+import id.my.hendisantika.springbootaopjamon.model.BookVolumeList;
 import id.my.hendisantika.springbootaopjamon.service.BookService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,4 +27,9 @@ public class BookController {
 
     private final BookService bookService;
 
+    @GetMapping
+    @MethodMonitor(name = "book.list", uri = "/book")
+    public ResponseEntity<BookVolumeList> books() {
+        return ResponseEntity.ok(bookService.books());
+    }
 }
