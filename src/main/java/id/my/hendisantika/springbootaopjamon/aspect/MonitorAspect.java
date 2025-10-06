@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
+import org.aspectj.lang.annotation.Pointcut;
 import org.springframework.stereotype.Component;
 
 /**
@@ -48,5 +49,9 @@ public class MonitorAspect {
                     .tag("method", methodMonitor.method())
                     .register(meterRegistry);
         }
+    }
+
+    @Pointcut("execution(* id.my.hendisantika.springbootaopjamon.controller.*.*())")
+    public void controllerMethod() {
     }
 }
