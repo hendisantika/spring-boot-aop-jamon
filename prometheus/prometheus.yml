@@ -16,3 +16,10 @@ scrape_configs:
       - targets: [ 'host.docker.internal:8080' ]
         labels:
           application: 'spring-boot-aop-jamon'
+
+  - job_name: 'HENDISANTIKA'
+    metrics_path: '/actuator/prometheus'
+    static_configs:
+      - targets: [ 'localhost:8080' ]
+        labels:
+          application: 'spring-boot-aop-jamon'
