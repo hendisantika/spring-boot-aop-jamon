@@ -4,6 +4,8 @@ target/
 !**/src/test/**/target/
 logs
 postgres_data
+prometheus_data
+grafana_data
 
 ### STS ###
 .apt_generated
